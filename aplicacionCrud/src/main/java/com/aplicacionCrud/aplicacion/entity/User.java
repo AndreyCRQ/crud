@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class User implements Serializable{
@@ -23,21 +25,22 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 4980045301371508893L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native'")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name= "native", strategy = "native")
 	private Long id;
 	
+	@Column
 	private String firstName;
-	
+	@Column
 	private String lastName;
-	
+	@Column
 	private String email;
-	
+	@Column
 	private String userName;
-	
+	@Column
 	private String password;
 	
-	
+	@Transient
 	private String confirmPassword;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name= "user_roles",
